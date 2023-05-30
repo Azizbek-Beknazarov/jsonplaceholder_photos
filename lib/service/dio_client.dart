@@ -14,8 +14,12 @@ class DioClient {
           await dio.get('https://jsonplaceholder.typicode.com/photos');
       print("----> response.statusCode: ${response.statusCode.toString()}");
       if (response.statusCode == 200) {
-        var list = List<PhotosModel>.from(
-            response.data.map((model) => PhotosModel.fromJson(model)));
+        //bu yerda data -Response body dynamic tipda kelyapti. Response<dynamic> ni List<dynamic> ga o'tkazdik.
+        final result = response.data as List;
+        //List<dynamic> ni List<PhotosModel> ga o'tkazdik.
+        final list = result.map((json) => PhotosModel.fromJson(json)).toList();
+        // var list = List<PhotosModel>.from(
+        //     response.data.map((model) => PhotosModel.fromJson(model)));
         return list;
       } else {
         throw Exception('Can\'t get photos');
