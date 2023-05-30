@@ -16,10 +16,20 @@ class DioClient {
       if (response.statusCode == 200) {
         //bu yerda data -Response body dynamic tipda kelyapti. Response<dynamic> ni List<dynamic> ga o'tkazdik.
         final result = response.data as List;
+
         //List<dynamic> ni List<PhotosModel> ga o'tkazdik.
-        final list = result.map((json) => PhotosModel.fromJson(json)).toList();
+
+        ///1 usul
+        // final list = result.map((json) => PhotosModel.fromJson(json)).toList();
+
+        ///2 usul
+        final list = List.generate(
+            result.length, (index) => PhotosModel.fromJson(result[index]));
+
+        ///3 usul
         // var list = List<PhotosModel>.from(
         //     response.data.map((model) => PhotosModel.fromJson(model)));
+
         return list;
       } else {
         throw Exception('Can\'t get photos');

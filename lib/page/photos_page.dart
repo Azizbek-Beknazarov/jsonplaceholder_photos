@@ -34,6 +34,13 @@ class _PhotosPageState extends State<PhotosPage> {
                 Positioned(
                   child: Image.network(
                     state.list[index].url ?? "",
+                    errorBuilder: (_, __, ___) {
+                      return Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        color: Colors.red,
+                      );
+                    },
                     fit: BoxFit.cover,
                   ),
                 ),
