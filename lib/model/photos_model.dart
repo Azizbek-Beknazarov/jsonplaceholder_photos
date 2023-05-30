@@ -1,11 +1,11 @@
 class PhotosModel {
-  PhotosModel({
-    this.albumId,
-    this.id,
-    this.title,
-    this.url,
-    this.thumbnailUrl,
-  });
+  int? albumId;
+  int? id;
+  String? title;
+  String? url;
+  String? thumbnailUrl;
+
+  PhotosModel({this.albumId, this.id, this.title, this.url, this.thumbnailUrl});
 
   PhotosModel.fromJson(Map<String, dynamic> json) {
     albumId = json['albumId'];
@@ -15,19 +15,13 @@ class PhotosModel {
     thumbnailUrl = json['thumbnailUrl'];
   }
 
-  num? albumId;
-  num? id;
-  String? title;
-  String? url;
-  String? thumbnailUrl;
-
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['albumId'] = albumId;
-    map['id'] = id;
-    map['title'] = title;
-    map['url'] = url;
-    map['thumbnailUrl'] = thumbnailUrl;
-    return map;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['albumId'] = albumId;
+    data['id'] = id;
+    data['title'] = title;
+    data['url'] = url;
+    data['thumbnailUrl'] = thumbnailUrl;
+    return data;
   }
 }

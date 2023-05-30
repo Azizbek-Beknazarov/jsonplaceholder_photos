@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jsonplaceholder_photos/model/photos_model.dart';
-import 'package:jsonplaceholder_photos/service/api_client.dart';
+import 'package:jsonplaceholder_photos/service/dio_client.dart';
 
 part 'event.dart';
 
@@ -16,7 +16,8 @@ class PhotosBloc extends Bloc<PhotoEvent, PhotoState> {
     GetPhotosEvent event,
     Emitter<PhotoState> emit,
   ) async {
-    final response = await ApiClient.instance.fetchPhotos();
+    // final response = await ApiClient.instance.fetchPhotos();
+    final response = await DioClient.instance.fetchPhotos();
     emit(state.copyWith(
       list: response,
     ));
