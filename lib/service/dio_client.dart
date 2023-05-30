@@ -1,17 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:jsonplaceholder_photos/model/photos_model.dart';
 
+const String BASE_URL = 'https://jsonplaceholder.typicode.com';
+
 class DioClient {
   DioClient._();
 
-  final Dio dio = Dio();
-
+  final Dio dio = Dio(BaseOptions(baseUrl: BASE_URL))
+    ..interceptors.addAll([LogInterceptor()]);
+  //
   static final DioClient instance = DioClient._();
 
   Future<List<PhotosModel>> fetchPhotos() async {
     try {
-      final response =
-          await dio.get('https://jsonplaceholder.typicode.com/photos');
+      final response = await dio.get("/photos");
       print("----> response.statusCode: ${response.statusCode.toString()}");
       if (response.statusCode == 200) {
         //bu yerda data -Response body dynamic tipda kelyapti. Response<dynamic> ni List<dynamic> ga o'tkazdik.
